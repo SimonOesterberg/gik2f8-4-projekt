@@ -2,6 +2,18 @@ const menuListElement = document.getElementById('menuList');
 
 const menuApi = new MenuApi('http://localhost:5000/menu');
 
+
+
+  
+function addToOrder(item){
+OrdersApi.create(item).then((item) => {
+     if (item) {
+        renderList();
+      }
+ });
+}
+  
+
 function renderMenu() {
     console.log('rendering');
   
@@ -34,5 +46,18 @@ function renderMenu() {
   
     return html;
   }
+
+   
+function deleteOrder(id) {
+    OrdersApi.remove(id).then((result) => {
+  
+      renderList();
+    });
+  }
+  
+  
+  
+  
+  
 
   renderMenu();

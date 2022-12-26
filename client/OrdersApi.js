@@ -7,6 +7,7 @@ class OrdersApi {
     }
   
     create(data) {
+      
       const JSONData = JSON.stringify(data);
       console.log(`Sending ${JSONData} to ${this.url}`);
   
@@ -34,7 +35,7 @@ class OrdersApi {
     }
   
     remove(id) {
-      console.log(`Removing task with id ${id}`);
+      console.log(`Removing paella: ${id}`);
   
       return fetch(`${this.url}/${id}`, {
         method: 'DELETE'
@@ -42,30 +43,6 @@ class OrdersApi {
         .then((result) => result)
         .catch((err) => console.log(err));
   
-    }
-  
-  
-  
-    update(id, completed) {
-      const data = {"id": id, "completed": completed}
-      const JSONData = JSON.stringify(data);
-      console.log(`Sending ${JSONData} to ${this.url}`);
-  
-      const request = new Request(`${this.url}/${id}`, {
-        method: 'PATCH',
-        body: JSONData,
-        headers: {
-          'content-type': 'application/json'
-        }
-      });
-  
-      return (
-        fetch(request)
-          .then((result) => result.json())
-          .then((data) => data)
-          .catch((err) => console.log(err))
-      );
-    }
-      
+    }      
   }
   

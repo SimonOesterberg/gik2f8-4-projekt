@@ -15,27 +15,21 @@ app
     next();
   });
 
-/* app.get(
-    ['/menu', '/orders'], async (req, res) => {
+app.get(['/menu', '/orders'], async (req, res) => {
   try {
-    const menu = await fs.readFile('./menu.json');
-    const orders = await fs.readFile('./orders.json');
-    res.send(JSON.parse(menu));
-    res.send(JSON.parse(orders));
+
+    if (req.url === "/menu") {
+        const menu = await fs.readFile('./menu.json');
+        res.send(JSON.parse(menu));
+    } else if (req.url === "/orders") {
+        const orders = await fs.readFile('./orders.json');
+        res.send(JSON.parse(orders));
+    }
+
   } catch (error) {
     res.status(500).send({ error });
   }
-}); */
-
-app.get('/menu', async (req, res) => {
-
-    try {
-      const menu = await fs.readFile('./menu.json');
-      res.send(JSON.parse(menu));
-    } catch (error) {
-      res.status(500).send({ error });
-    }
-  });
+});
 
 
 app.post('/orders', async (req, res) => {
