@@ -1,0 +1,13 @@
+[
+{"id" : 0, "name" : "Kycklingpaella", "price" : 199, "description" : "Klassisk paella med kyckling och parika."},
+{"id" : 1, "name" : "Svamp paella", "price" : 349, "description" : "Paella med de finaste kantarellerna, plockade färska i den svenska urskogen."},
+{"id" : 2, "name" : "Vegopaella", "price" : 159, "description" : "Vegetarisk paella med zucchini och färska morötter."},
+{"id" : 3, "name" : "Lyxpaella", "price" : 999, "description" : "Paella med kyckling och toppad med bladguld. Lagas på endast solljus och kysst av kungen själv "},
+{"id" : 4, "name" : "Paella de la mar", "price" : 199, "description" : "Paella med skaldjur."},
+{"id" : 5, "name" : "Paella från hav och land", "price" : 199, "description" : "Paella med kryddig chorizo och köttiga scampi. Varning: HOT"},
+{"id" : 6, "name" : "Himmelriket", "price" : 499, "description" : "Paella gjord på färsk anka. Serveras med vaktelägg och det allra finaste riset."},
+{"id" : 7, "name" : "Havet är djupt", "price" : 200, "description" : "Paella gjord på nyfångad och frusen marulk, obs: serveras endast i restauranger runt 68.650184, 5.461315"},
+{"id" : 8, "name" : "Minimalistiks paella", "price" : 59, "description" : "Endast ris."},
+{"id" : 9, "name" : "Viltpaella", "price" : 399, "description" : "Paella mes renskav, viltsvinsfärs och rårörda lingon."},
+{"id" : 10, "name" : "En svenks klassiker", "price" : 200, "description" : "Paella med mamma scans köttbullar, hemmagjord Janssons frestelse. Serveras med ett kallt glas O'boy."}
+]
