@@ -11,4 +11,12 @@ class MenuApi {
         .then((data) => data)
         .catch((err) => console.log(err));
     }
+
+    /* getItem(id) {
+        return fetch(`${this.url}/${id}`)
+          .then((result) => result.json())
+          .then((data) => data)
+          .catch((err) => console.log(err));
+      }
+ */
 }

@@ -18,19 +18,25 @@
   <main id="root" class="flex flex-items-center bg-[url('../images/bg.jpg')] bg-cover min-h-screen p-5">
     <section class="flex gap-10 w-full xl:w-4/5 mx-2 xl:mx-auto bg-white bg-opacity-75 p-5 rounded-lg">
       <section class="flex-1">
-        <h2 class="mb-6 text-3xl text-orange-900">Beställ</h2>
+        <h2 class="mb-6 text-3xl text-orange-900">Meny</h2>
         <form id="menuForm" name="menuForm">
             <section class="mb-2">
-                <label class="block pr-5 mb-2 text-xl" for="menuList">Meny</label>
-                <ul class="block bg-white bg-opacity-75 mt-2 p-10 rounded border-neutral-400 border border-solid shadow" id="menuList" name="menuList">
-                </ul>
+                <label class="block pr-5 mb-2 text-xl" for="menuList"></label>
+                
+                    <input type="hidden" id="orderedItem" name="orderedItem"/>
+                    <ul id="menuList" name="menuList"></ul>
+                    <!--<button name="addToOrder" class="rounded-md bg-yellow-500 hover:bg-yellow-400 px-4 py-1" type="submit">Lägg till markerade rätter i beställning</button>-->
+                
             </section>
+            
         </form>
       </section>
       <section class="flex-1 px-5">
         <h2 class="mb-6 text-3xl text-orange-900">Min beställning</h2>
-        <ul id="orderList">
-        </ul>
+            <section class="block bg-white bg-opacity-75 mt-2 p-10 rounded border-neutral-400 border border-solid shadow">
+                <ul id="orderList">
+                </ul>
+            </section>
       </section>
     </section>
   </main>
