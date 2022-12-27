@@ -2,7 +2,6 @@ const menuListElement = document.getElementById('menuList');
 const orderListElement = document.getElementById('orderList')
 
 const menuApi = new MenuApi('http://localhost:5000/menu');
-const ordersApi = new OrdersApi('http://localhost:5000/orders');
 
 menuForm.addEventListener('submit', onSubmit);
 
@@ -117,9 +116,9 @@ function renderMenu() {
   }
 
 
-function calcPrize(items){
+function placeOrder(order){
     
-    
+
 }
 
    
