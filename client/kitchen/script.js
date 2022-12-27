@@ -43,11 +43,16 @@ function renderOrders(){
     ordersApi.getAll().then((orders) => {
 
         orderListElement.innerHTML = '';
-
+        let totalAmount = 0;
+        const totalPriceElement = document.getElementById('totalPrice');
+        
         if (orders && orders.length > 0) {
             orders.forEach((orderItem) => {
-            orderListElement.insertAdjacentHTML('beforeend', renderOrderItem(orderItem));
+                totalAmount += orderItem.price;
+                orderListElement.insertAdjacentHTML('beforeend', renderOrderItem(orderItem));
             });
+            totalPriceElement.innerHTML = totalAmount + ":-";
+            
         } else {
             orderListElement.insertAdjacentHTML('beforeend', `<h2 class="text-center text-xl font-bold text-gray-500" >Inget i beställningen ännu!</h2>`)
         }
@@ -60,10 +65,11 @@ function renderMenu() {
     menuApi.getAll().then((menu) => {
 
         menuListElement.innerHTML = '';
-
+        
       if (menu && menu.length > 0) {
         menu.forEach((menuItem) => {
           menuListElement.insertAdjacentHTML('beforeend', renderMenuItem(menuItem));
+
         });
       }
     });
@@ -98,7 +104,7 @@ function renderMenu() {
                 <div class="flex items-center justify-start">
                     <h3 class="mb-1 text-xl font-bold text-pink-800 uppercase">${name}</h3>
                     <p class="ml-1 mr-1"> - </p>
-                    <h3 class="mb-1 flex-1 text-xl font-bold text-pink-800 uppercase">${price}:-</h3>
+                    <h3 class="mb-1 flex-1 text-xl font-bold text-pink-800ö uppercase">${price}:-</h3>
                 </div>
                 <p class="mt-2 text-xs">${description}</p>
             </div>

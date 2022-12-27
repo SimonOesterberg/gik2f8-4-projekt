@@ -15,7 +15,7 @@ app
     next();
   });
 
-app.get(['/menu', '/orders'], async (req, res) => {
+app.get(['/menu', '/orders', '/sentOrders'], async (req, res) => {
   try {
 
     if (req.url === "/menu") {
@@ -24,6 +24,9 @@ app.get(['/menu', '/orders'], async (req, res) => {
     } else if (req.url === "/orders") {
         const orders = await fs.readFile('./orders.json');
         res.send(JSON.parse(orders));
+    } else if (req.url === '/sentOrders.json'){
+      const orders = await fs.readFile('./sentOrders.json');
+      res.send(JSON.parse(sentOrders));
     }
 
   } catch (error) {
