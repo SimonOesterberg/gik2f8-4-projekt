@@ -82,7 +82,7 @@ function renderMenu() {
                 <p class="mt-2 text-xs">${description}</p>
             </div>
             <div class="flex items-center">
-                <button name="addToOrder" class="rounded-md bg-teal-700 hover:bg-teal-600 bg-opacity-50 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}">Lägg till</button>
+                <button name="addToOrder" class="rounded-md bg-teal-700 hover:bg-teal-600 bg-opacity-50 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}">Lägg till i order</button>
             </div>
         </li>`;
   
