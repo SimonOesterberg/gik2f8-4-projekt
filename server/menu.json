@@ -7,7 +7,7 @@
 {"id" : 5, "name" : "Paella från hav och land", "price" : 199, "description" : "Paella med kryddig chorizo och köttiga scampi. Varning: HOT"},
 {"id" : 6, "name" : "Himmelriket", "price" : 499, "description" : "Paella gjord på färsk anka. Serveras med vaktelägg och det allra finaste riset."},
 {"id" : 7, "name" : "Havet är djupt", "price" : 200, "description" : "Paella gjord på nyfångad och frusen marulk, obs: serveras endast i restauranger runt 68.650184, 5.461315"},
-{"id" : 8, "name" : "Minimalistiks paella", "price" : 59, "description" : "Endast ris."},
+{"id" : 8, "name" : "Minimalistisk paella", "price" : 59, "description" : "Endast ris."},
 {"id" : 9, "name" : "Viltpaella", "price" : 399, "description" : "Paella mes renskav, viltsvinsfärs och rårörda lingon."},
 {"id" : 10, "name" : "En svensk klassiker", "price" : 200, "description" : "Paella med mamma scans köttbullar, hemmagjord Janssons frestelse och toppas med senapssill. Serveras med ett kallt glas O'boy."}
 ]

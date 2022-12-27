@@ -35,7 +35,7 @@ class SentOrdersApi {
     }
     
     remove(id) {
-      console.log(`Removing paella: ${id}`);
+      console.log(`Removing order: ${id}`);
   
       return fetch(`${this.url}/${id}`, {
         method: 'DELETE'

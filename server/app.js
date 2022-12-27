@@ -24,8 +24,8 @@ app.get(['/menu', '/orders', '/sentOrders'], async (req, res) => {
     } else if (req.url === "/orders") {
         const orders = await fs.readFile('./orders.json');
         res.send(JSON.parse(orders));
-    } else if (req.url === '/sentOrders.json'){
-      const orders = await fs.readFile('./sentOrders.json');
+    } else if (req.url === '/sentOrders'){
+      const sentOrders = await fs.readFile('./sentOrders.json');
       res.send(JSON.parse(sentOrders));
     }
 
@@ -35,48 +35,95 @@ app.get(['/menu', '/orders', '/sentOrders'], async (req, res) => {
 });
 
 
-app.post('/orders', async (req, res) => {
-  try {
-    const item = req.body;
-    const listBuffer = await fs.readFile('./orders.json');
-    const currentOrder = JSON.parse(listBuffer);
+app.post(['/orders', '/sentOrders'], async (req, res) => {
+  if (req.url === "/orders") {
+    try {
+      const item = req.body;
+      const listBuffer = await fs.readFile('./orders.json');
+      const currentOrder = JSON.parse(listBuffer);
 
-    let maxOrderItemId = 0;
-    if (currentOrder && currentOrder.length > 0) {
-      maxOrderItemId = currentOrder.reduce(
-        (maxId, currentElement) =>
-          currentElement.id > maxId ? currentElement.id : maxId,
-        maxOrderItemId
-      );
+      let maxOrderItemId = 0;
+      if (currentOrder && currentOrder.length > 0) {
+        maxOrderItemId = currentOrder.reduce(
+          (maxId, currentElement) =>
+            currentElement.id > maxId ? currentElement.id : maxId,
+          maxOrderItemId
+        );
+      }
+
+      const newOrderItem = { id: maxOrderItemId + 1, ...item };
+      const updatedOrder = currentOrder ? [...currentOrder, newOrderItem] : [newOrderItem];
+
+      await fs.writeFile('./orders.json', JSON.stringify(updatedOrder));
+      res.send(updatedOrder);
+    } catch (error) {
+      res.status(500).send({ error: error.stack });
     }
+  } else if (req.url === '/sentOrders') {
+    try {
+      const order = req.body;
+      const listBuffer = await fs.readFile('./sentOrders.json');
+      const currentSentOrders = JSON.parse(listBuffer);
 
-    const newOrderItem = { id: maxOrderItemId + 1, ...item };
-    const updatedOrder = currentOrder ? [...currentOrder, newOrderItem] : [newOrderItem];
+      let maxSentOrdersId = 0;
+      if (currentSentOrders && currentSentOrders.length > 0) {
+        maxSentOrdersId = currentSentOrders.reduce(
+          (maxId, currentElement) =>
+            currentElement.id > maxId ? currentElement.id : maxId,
+            maxSentOrdersId
+        );
+      }
 
-    await fs.writeFile('./orders.json', JSON.stringify(updatedOrder));
-    res.send(updatedOrder);
-  } catch (error) {
-    res.status(500).send({ error: error.stack });
+      const newSentOrder = { id: maxSentOrdersId + 1, content: order.pop() };
+      const updatedSentOrders = currentSentOrders ? [...currentSentOrders, newSentOrder] : [newSentOrder];
+
+      await fs.writeFile('./sentOrders.json', JSON.stringify(updatedSentOrders));
+      res.send(updatedSentOrders);
+    } catch (error) {
+      res.status(500).send({ error: error.stack });
+    }
   }
 });
 
-app.delete('/orders/:id', async (req, res) => {
-  console.log(req);
-  try {
-    const id = req.params.id;
-    const listBuffer = await fs.readFile('./orders.json');
-    const currentOrder = JSON.parse(listBuffer);
-    if (currentOrder.length > 0) {
-      await fs.writeFile(
-        './orders.json',
-        JSON.stringify(currentOrder.filter((orderItem) => orderItem.id != id))
-      );
-      res.send({ message: `Uppgift med id ${id} togs bort` });
-    } else {
-      res.status(404).send({ error: 'Ingen uppgift att ta bort' });
+app.delete(['/orders/:id', '/sentOrders/:id'], async (req, res) => {
+  console.log(req.url);
+
+  const targetFile = req.url.substring(0, req.url.length - 2);
+
+  if (targetFile === '/orders') {
+    try {
+      const id = req.params.id;
+      const listBuffer = await fs.readFile('./orders.json');
+      const currentOrder = JSON.parse(listBuffer);
+      if (currentOrder.length > 0) {
+        await fs.writeFile(
+          './orders.json',
+          JSON.stringify(currentOrder.filter((orderItem) => orderItem.id != id))
+        );
+        res.send({ message: `Rätt med id ${id} togs bort` });
+      } else {
+        res.status(404).send({ error: 'Ingen rätt att ta bort' });
+      }
+    } catch (error) {
+      res.status(500).send({ error: error.stack });
     }
-  } catch (error) {
-    res.status(500).send({ error: error.stack });
+  } else if (targetFile === '/sentOrders') {
+    try {
+      const id = req.params.id;
+      const listBuffer = await fs.readFile('./sentOrders.json');
+      const currentOrders = JSON.parse(listBuffer);
+      if (currentOrders.length > 0) {
+        await fs.writeFile(
+          './sentOrders.json',
+          JSON.stringify(currentOrders.filter((orderItem) => orderItem.id != id))
+        );
+        res.send({ message: `Order med id ${id} togs bort` });
+      } else {
+        res.status(404).send({ error: 'Ingen order att ta bort' });
+      }
+    } catch (error) {
+      res.status(500).send({ error: error.stack });
+    }
   }
 });
 

@@ -11,22 +11,24 @@
   <link rel="shortcut icon"
         href="data:image/x-icon;"
         type="image/x-icon" />
-  <title>Paella Store</title>
+  <title>Köket</title>
 </head>
 
 <body>
-  <main id="root" class="flex flex-items-center bg-[url('../images/bg.jpg')] bg-cover min-h-screen p-5">
-      <section class="flex-1 px-5">
-        <h2 class="mb-6 text-3xl text-orange-900">Lagda Beställningar</h2>
-            <section class="block bg-white bg-opacity-75 mt-2 p-10 rounded border-neutral-400 border border-solid shadow">
-                <ul id="setOrdersList">
-                </ul>
-            </section>
+  <main id="root" class="flex flex-col flex-items-center justify-center bg-[url('../../images/bg.jpg')] bg-cover min-h-screen p-5">
+    <section class="flex justify-center gap-10 w-full xl:w-4/5 mx-2 xl:mx-auto bg-white bg-opacity-75 p-5 rounded-lg">
+      <section class="px-5">
+        <h2 class="mb-6 text-3xl text-orange-900 text-center">Lagda Beställningar</h2>
+        <ul id="sentOrdersList">
+        </ul>
       </section>
     </section>
+    </section>
+    <section class="flex justify-end gap-10 w-full xl:w-4/5 mt-2 xl:mx-auto">
+      <a href="../index.html" class= "w-full bg-yellow-400 hover:bg-yellow-300 text-black font-semibold py-2 px-2 rounded border-solid shadow text-center">Gå tillbaka</a>
+    </section>
   </main>
-  <script src="MenuApi.js"></script>
-  <script src="OrdersApi.js"></script>
+  <script src="SentOrdersApi.js"></script>
   <script src="script.js"></script>
 </body>
 

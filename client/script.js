@@ -1,8 +1,10 @@
 const menuListElement = document.getElementById('menuList');
-const orderListElement = document.getElementById('orderList')
+const orderListElement = document.getElementById('orderList');
+
 
 const menuApi = new MenuApi('http://localhost:5000/menu');
 const ordersApi = new OrdersApi('http://localhost:5000/orders');
+const sentOrdersApi = new SentOrdersApi('http://localhost:5000/sentOrders');
 
 menuForm.addEventListener('submit', onSubmit);
 
@@ -34,6 +36,7 @@ function addToOrder(item) {
     ordersApi.create(item).then((item) => {
         if (item) {
             renderOrders();
+            renderMenu();
         }
     });
 }
@@ -50,11 +53,12 @@ function renderOrders(){
             orders.forEach((orderItem) => {
                 totalAmount += orderItem.price;
                 orderListElement.insertAdjacentHTML('beforeend', renderOrderItem(orderItem));
+
             });
             totalPriceElement.innerHTML = totalAmount + ":-";
             
         } else {
-            orderListElement.insertAdjacentHTML('beforeend', `<h2 class="text-center text-xl font-bold text-gray-500" >Inget i beställningen ännu!</h2>`)
+            orderListElement.insertAdjacentHTML('beforeend', `<h2 class="text-center text-xl font-bold text-gray-500 p-4" >Inget i beställningen ännu!</h2>`)
         }
     });
 }
@@ -88,7 +92,8 @@ function renderMenu() {
                 <p class="mt-2 text-xs">${description}</p>
             </div>
             <div class="flex items-center">
-                <button name="addToOrder" class="rounded-md bg-teal-700 hover:bg-teal-600 bg-opacity-50 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}">Lägg till i order</button>
+                <button name="addToOrder" class="rounded-md bg-teal-700 hover:bg-teal-600 bg-opacity-50 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}"> Lägg Till</button>
+                
             </div>
         </li>`;
   
@@ -109,7 +114,7 @@ function renderMenu() {
                 <p class="mt-2 text-xs">${description}</p>
             </div>
             <div class="flex items-center">
-                <button name="removeOrderItem" class="rounded-md bg-red-300 hover:bg-red-100 px-4 py-1" type="submit" onclick="deleteOrder(${id})">Ta bort</button>
+                <button name="removeOrderItem" class="rounded-md bg-red-300 hover:bg-red-100 px-4 py-1" type="submit" onclick="deleteOrder(${id})"> Ta Bort </button>
             </div>
         </li>`;
   
@@ -117,9 +122,25 @@ function renderMenu() {
   }
 
 
-function placeOrder(order){
-    
+function sendOrder() {
 
+    let newOrder = [];
+
+    ordersApi.getAll().then((order) => {
+
+        if (order) {
+
+            newOrder.push(order);
+
+            if (newOrder.length > 0) {
+                sentOrdersApi.create(newOrder).then((newOrder) => {
+                    if (newOrder) {
+                        renderOrders();
+                    }
+                });
+            }
+        }
+    });
 }
 
    
@@ -128,12 +149,8 @@ function deleteOrder(id) {
   
       renderOrders();
     });
-  }
-  
-  
-  
-  
-  
+}
+
 
   renderMenu();
   renderOrders();
