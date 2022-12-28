@@ -49,7 +49,7 @@ function renderOrders(){
             orderListElement.insertAdjacentHTML('beforeend', renderOrderItem(orderItem));
             });
         } else {
-            orderListElement.insertAdjacentElement('beforeend', `<p>Inget i beställningen ännu!</p>`)
+            orderListElement.insertAdjacentHTML('beforeend', `<h2 class="text-center text-xl font-bold text-gray-500" >Inget i beställningen ännu!</h2>`)
         }
     });
 }
@@ -82,7 +82,7 @@ function renderMenu() {
                 <p class="mt-2 text-xs">${description}</p>
             </div>
             <div class="flex items-center">
-                <button name="addToOrder" class="rounded-md bg-yellow-500 hover:bg-yellow-400 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}">Lägg till</button>
+                <button name="addToOrder" class="rounded-md bg-teal-700 hover:bg-teal-600 bg-opacity-50 px-4 py-1" type="submit" onclick="orderedItem.value = ${id}">Lägg till</button>
             </div>
         </li>`;
   
@@ -103,7 +103,7 @@ function renderMenu() {
                 <p class="mt-2 text-xs">${description}</p>
             </div>
             <div class="flex items-center">
-                <button name="removeOrderItem" class="rounded-md bg-red-600 hover:bg-red-400 px-4 py-1" type="submit" onclick="deleteOrder(${id})">Ta bort</button>
+                <button name="removeOrderItem" class="rounded-md bg-red-300 hover:bg-red-100 px-4 py-1" type="submit" onclick="deleteOrder(${id})">Ta bort</button>
             </div>
         </li>`;
   
